@@ -1,0 +1,15 @@
+{
+  "main" : {
+    "welcome" : "Hallo von {company}!",
+    "wordingWelcome": "Willkommen zu",
+    "welcome1" : "Finde heraus, dass du bist",
+    "welcome2" : "Lieblingscocktail hier",
+    "searchWording" : "Suche cokctail nach Namen",
+    "btnSearch" : "Suche"
+  },
+  "detail" : {
+    "intructions" : "Anweisung",
+    "ingredients" : "Zutaten",
+    "measurments" : "Messungen"
+  }
+}
