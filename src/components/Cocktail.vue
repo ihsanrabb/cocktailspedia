@@ -8,20 +8,21 @@
                     <img :src="cocktail.strDrinkThumb" class=" img-fluid" style="border-radius: 10px">
                 </div>
                 <div class="col-md-8 align-self-center cocktail-instruction">
-                    <h3 style="color: #ed2939">Instructions  </h3>
-                    <p class="text-white">{{cocktail.strInstructions}}</p>
+                    <h3 style="color: #ed2939">{{ $t('detail.intructions') }}  </h3>
+                    <p class="text-white" v-if="stateLang == 'en'">{{cocktail.strInstructions}}</p>
+                    <p class="text-white" v-else>{{cocktail.strInstructionsDE}}</p>
                 </div>
             </div>
 
-            <h3 class="mt-4" style="text-align: left; color: #ed2939">Ingredients : </h3>
-            <div v-for="(ingredient, index) in ingredients" :key="ingredient">
+            <h3 class="mt-4" style="text-align: left; color: #ed2939"> {{ $t('detail.ingredients') }} : </h3>
+            <div v-for="(ingredient, index) in ingredients" :key="ingredient + index">
                 <div class="ingredient-box">
                     <p>{{index + 1}}. {{ingredient}}</p>
                 </div>
             </div>
 
-            <h3 class="mt-4" style="text-align: left; color: #ed2939">Measurments : </h3>
-            <div v-for="(measurment, index) in measurments" :key="measurment">
+            <h3 class="mt-4" style="text-align: left; color: #ed2939">{{ $t('detail.measurments') }} : </h3>
+            <div v-for="(measurment, index) in measurments" :key="index + measurment">
                 <div class="ingredient-box">
                     <p>{{index + 1}}. {{measurment}}</p>
                 </div>
@@ -46,7 +47,8 @@ export default {
             id: this.$route.params.id,
             cocktail: null,
             ingredients: [],
-            measurments: []
+            measurments: [],
+            stateLang: "en"
         }
     },
     created() {
@@ -69,6 +71,11 @@ export default {
                 }
             })
             .catch((err) => console.log(err))
+
+        let langs = window.localStorage.getItem('lang');
+        if(langs) {
+            this.stateLang = langs
+        }
     }
 }
 </script>
