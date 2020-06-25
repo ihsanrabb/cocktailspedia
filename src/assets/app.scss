@@ -5,7 +5,8 @@ body {
 }
 
 .cocktail-box {
-    border-bottom: 3px solid #ed2939;
+    clip-path: polygon(0% 0%, 100% 0, 100% 90%, 50% 100%, 0 90%);
+    border-bottom: 5px solid #ed2939;
     cursor: pointer;
 }
 
