@@ -2,16 +2,16 @@
   <div class="home">
     
       <div class="container">
-        <h2 class="mt-3" style="color: #fff">Welcome to <span style="color: #ed2939">Cokctailspedia</span>,<br>Find about you're <br>favorite cocktail here</h2>
+        <h2 class="mt-3" style="color: #fff">{{ $t('main.wordingWelcome') }} <span style="color: #ed2939">Cokctailspedia</span>,<br> {{ $t('main.welcome1') }} <br> {{ $t('main.welcome2') }} </h2>
         <div class="d-flex justify-content-center mt-4">
-          <input class="form-control input-search" type="search" placeholder="Search cokctail by name" aria-label="Search" v-model="searchInput" @keyup.enter="searchCocktail">
-          <button class="btn btn-outline-success ml-2" type="submit" @click="searchCocktail">Search</button>
+          <input class="form-control input-search" type="search" :placeholder="$t('main.searchWording')" aria-label="Search" v-model="searchInput" @keyup.enter="searchCocktail">
+          <button class="btn btn-outline-success ml-2" type="submit" @click="searchCocktail">{{ $t('main.btnSearch') }}</button>
         </div>
         
         <div class="lds-grid mt-4" v-if="loading"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 
-        <div class="row row-cols-1 row-cols-md-4 mt-4" v-else>
-          <div v-for="(cocktail,index) in listCocktails" :key="index">
+        <div class="row row-cols-1 row-cols-md-4 row-cols-sm-3  mt-4" v-else>
+          <div v-for="(cocktail) in listCocktails" :key="cocktail.idDrink">
             <router-link tag="div" :to=" '/cocktail/' + cocktail.idDrink" class="col mb-4">
               <div class="card cocktail-box">
                 <img :src="cocktail.strDrinkThumb" class="card-img-top img-fluid">
@@ -39,18 +39,25 @@
         </div>
 
       </div>
-    </div>
+
+      <LangSwitch class="mb-4" />
+
+  </div>
   
 </template>
 
 <script>
 import axios from "axios"
+import LangSwitch from "../components/LangSwitch"
 
 export default {
   name: "Home",
   metaInfo: {
     title: 'Cocktailspedia',
     titleTemplate: '%s | cocktail'
+  },
+  components: {
+    LangSwitch
   },
   data() {
     return {
@@ -59,7 +66,8 @@ export default {
       loading: false,
       recommendations: null,
       loadingRecom: true,
-      checkCocktail : false
+      checkCocktail : false,
+      langLocal: this.$route.params.lang
     }
   },
   methods: {
