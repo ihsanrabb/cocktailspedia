@@ -4,8 +4,10 @@ import router from "./router";
 import 'popper.js';
 import 'bootstrap';
 import "../src/assets/app.scss"
+import VueMeta from 'vue-meta'
 
 Vue.config.productionTip = false;
+Vue.use(VueMeta)
 
 new Vue({
   router,

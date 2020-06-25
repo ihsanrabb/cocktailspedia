@@ -38,6 +38,9 @@ import axios from "axios"
 
 export default {
     name: "Cocktail",
+    metaInfo: {
+        title: 'Detail'
+    },
     data() {
         return {
             id: this.$route.params.id,
