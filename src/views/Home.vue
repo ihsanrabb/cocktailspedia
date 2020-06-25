@@ -2,7 +2,7 @@
   <div class="home">
     
       <div class="container">
-        <h2 class="mt-3" style="color: #fff">Welcome to <span style="color: #ed2939">cokctailpedia</span>,<br>Find about you're <br>favorite cocktail here</h2>
+        <h2 class="mt-3" style="color: #fff">Welcome to <span style="color: #ed2939">Cokctailspedia</span>,<br>Find about you're <br>favorite cocktail here</h2>
         <div class="d-flex justify-content-center mt-4">
           <input class="form-control input-search" type="search" placeholder="Search cokctail by name" aria-label="Search" v-model="searchInput" @keyup.enter="searchCocktail">
           <button class="btn btn-outline-success ml-2" type="submit" @click="searchCocktail">Search</button>
@@ -17,12 +17,12 @@
                 <img :src="cocktail.strDrinkThumb" class="card-img-top img-fluid">
                 <div class="card-body">
                   <h5 class="card-title">{{cocktail.strDrink}}</h5>
-                  <p class="card-text">{{cocktail.strCategory}}</p>
+                  <p class="card-text mb-3">{{cocktail.strCategory}}</p>
                 </div>
               </div>
             </router-link>
           </div>
-          <!-- <h5 class="mx-auto text-white" v-if="!listCocktails">[Data not found]</h5> -->
+          <h5 class="mx-auto text-white" v-if="!listCocktails && checkCocktail">[Data not found]</h5>
         </div>
 
         <h2 class="text-white">Recommendation</h2>
@@ -48,17 +48,23 @@ import axios from "axios"
 
 export default {
   name: "Home",
+  metaInfo: {
+    title: 'Cocktailspedia',
+    titleTemplate: '%s | cocktail'
+  },
   data() {
     return {
       searchInput: "",
       listCocktails: null,
       loading: false,
       recommendations: null,
-      loadingRecom: true
+      loadingRecom: true,
+      checkCocktail : false
     }
   },
   methods: {
     searchCocktail() {
+      this.checkCocktail = true
       this.loading = true
       let keywoard = this.searchInput.toLowerCase()
       axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${keywoard}`)
